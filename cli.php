@@ -47,6 +47,14 @@ function __dispatch_request( $args ) {
 		wp_set_current_user( $args['user-id'] );
 		$_access_token = get_user_meta( get_current_user_id(), 'pjw_groupme_oauth_token', true );
 		$rest_api = new pjw_groupme_rest_api( $_access_token );
+		switch ( $args['action'] ) {
+			case 'list-groups':
+				$groups = $rest_api->groups();
+				foreach ( $groups as $group ) {
+					echo "{$group->name} - {$group->id}\n";
+				}
+				break;
+		}
 	} else {
 		echo "Usage: --user-id=X --action=Y ...\n\n";
 	}
