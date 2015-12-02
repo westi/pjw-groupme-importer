@@ -1,6 +1,6 @@
 <?php
 /**
- * Simple GroupMe OAuth class
+ * Simple GroupMe Importer class
  *
  */
 class pjw_groupme_importer {
