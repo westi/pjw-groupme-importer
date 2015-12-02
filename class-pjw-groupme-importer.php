@@ -1,9 +1,9 @@
 <?php
 /**
- * Simple GroupMe OAuth class
+ * Simple GroupMe Importer class
  *
  */
-class pjw_groupme_oauth {
+class pjw_groupme_importer {
 	private $version = 0.1;
 	private $debug;
 	private $meta_key = 'pjw_groupme_oauth_token';

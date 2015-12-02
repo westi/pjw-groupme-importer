@@ -8,11 +8,11 @@
  Author URI: http://blog.ftwr.co.uk/
  */
  
-require_once( __DIR__ . '/includes/class-pjw-gm-oauth.php' );
-require_once( __DIR__ . '/includes/class-pjw-groupme-rest-api.php' );
+require_once( __DIR__ . '/class-pjw-groupme-importer.php' );
+require_once( __DIR__ . '/class-pjw-groupme-rest-api.php' );
 
 function pjw_groupme_importer_go() {
-	global $pjw;
-	$pjw['pjw_groupme_oauth'] = new pjw_groupme_oauth();
+	global $pjw_groupme_importer;
+	$pjw_groupme_importer = new pjw_groupme_importer();
 }
 add_action('plugins_loaded', 'pjw_groupme_importer_go' );
