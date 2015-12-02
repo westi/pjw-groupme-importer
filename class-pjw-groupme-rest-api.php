@@ -35,6 +35,10 @@ class pjw_groupme_rest_api {
 		return $this->make_get_request( 'groups' );
 	}
 
+	public function group( $group_id ) {
+		return $this->make_get_request( 'groups/' . $group_id );
+	}
+
 	public function messages( $group_id ) {
 		$messages = $this->make_get_request( 'groups/' . $group_id . '/messages' );
 		// Ensure we are always chronologically sorted
