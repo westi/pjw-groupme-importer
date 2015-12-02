@@ -65,6 +65,7 @@ function __dispatch_request( $args ) {
 				} else {
 					echo "Usage: --user-id=X --action=fetch-messages --group-id=X ...\n\n";
 				}
+				break;
 		}
 	} else {
 		echo "Usage: --user-id=X --action=Y ...\n\n";
