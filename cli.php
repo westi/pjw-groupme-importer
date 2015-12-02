@@ -5,6 +5,7 @@ require_once( __DIR__ . '/class-pjw-groupme-rest-api.php' );
 function __parse_cli_args() {
 	$short_to_long = array(
 		'u:' => 'user-id:',
+		'g:' => 'group-id:',
 		'dry-run:',
 		'verbose:',
 		'action:'
@@ -54,6 +55,16 @@ function __dispatch_request( $args ) {
 					echo "{$group->name} - {$group->id} - {$group->messages->count} messages\n";
 				}
 				break;
+			case 'fetch-messages':
+				if ( isset( $args['group-id' ] ) ) {
+					$messages = $rest_api->messages( $args['group-id'] );
+
+					foreach ( $messages->messages as $message ) {
+						echo date( DATE_ISO8601, $message->created_at ) . " {$message->name}: {$message->text}\n";
+					}
+				} else {
+					echo "Usage: --user-id=X --action=fetch-messages --group-id=X ...\n\n";
+				}
 		}
 	} else {
 		echo "Usage: --user-id=X --action=Y ...\n\n";
