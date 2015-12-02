@@ -20,8 +20,25 @@ class pjw_groupme_rest_api {
 		}
 	}
 
+	protected function messages_sorter( $a, $b ) {
+		if ( $a->created_at == $b->created_at ) {
+			return 0;
+		} elseif ( $a->created_at < $b->created_at ) {
+			return -1;
+		} else {
+			return 1;
+		}
+	}
+
 	/** Public API **/
 	public function groups() {
 		return $this->make_get_request( 'groups' );
+	}
+
+	public function messages( $group_id ) {
+		$messages = $this->make_get_request( 'groups/' . $group_id . '/messages' );
+		// Ensure we are always chronologically sorted
+		usort( $messages->messages, array( $this, 'messages_sorter' ) );
+		return $messages;
 	}
 }
