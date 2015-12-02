@@ -51,7 +51,7 @@ function __dispatch_request( $args ) {
 			case 'list-groups':
 				$groups = $rest_api->groups();
 				foreach ( $groups as $group ) {
-					echo "{$group->name} - {$group->id}\n";
+					echo "{$group->name} - {$group->id} - {$group->messages->count} messages\n";
 				}
 				break;
 		}
