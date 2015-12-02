@@ -62,13 +62,13 @@ class pjw_groupme_importer {
 				echo "<li>Connected &#x2713;</li>\n";
 			}
 		?>
-			<li>Listing Groups
+			<li>Groups
 				<ul>
 					<?php
 						$rest_api = new pjw_groupme_rest_api( $_access_token );
 						$groups = $rest_api->groups();
 						foreach ( $groups as $group ) {
-							echo "<li>{$group->name}</li>\n";	
+							echo "<li><img src='{$group->image_url}' width='25px' height='25px'/> {$group->name} - {$group->id}</li>\n";	
 						}
 					?>
 				</ul>
