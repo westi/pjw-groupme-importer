@@ -58,7 +58,6 @@ class pjw_groupme_importer {
 			$_access_token = get_user_meta( get_current_user_id(), $this->meta_key, true );
 			if ( empty( $_access_token ) ) {
 				echo "<li>Connect</li>\n";
-				echo admin_url( 'admin.php?import=pjw-groupme-importer' );
 			} else {
 				echo "<li>Connected &#x2713;</li>\n";
 			}
