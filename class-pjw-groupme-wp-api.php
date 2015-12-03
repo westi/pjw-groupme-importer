@@ -54,12 +54,14 @@ class pjw_groupme_wp_api {
 	}
 
 	public function sync_message( $message ) {
+		$date = date( 'Y-m-d H:i:s', $message->created_at );
+
 		$_post = array(
 			'post_type' => 'pjw-groupme-message',
 			'post_status' => 'publish',
 			'post_content' => $message->text,
-			'post_date' => date( 'Y-m-d H:i:s', $message->created_at ),
-			'post_date_gmt' => date( 'Y-m-d H:i:s', $message->created_at ),
+			'post_date' => $date,
+			'post_date_gmt' => $date,
 		);
 
 		$_post_meta = array(
@@ -78,11 +80,11 @@ class pjw_groupme_wp_api {
 		}
 
 		foreach( $message->attachments as $attachment ) {
-			$this->sideload_attachment( $attachment, $_post_id );
+			$this->sideload_attachment( $attachment, $_post_id, $date );
 		}
 	}
 
-	private function sideload_attachment( $attachment, $_to_post_id ) {
+	private function sideload_attachment( $attachment, $_to_post_id, $date ) {
 		if ( 'image' === $attachment->type ) {
 			$response = wp_remote_head( $attachment->url );
 			if ( 200 == wp_remote_retrieve_response_code( $response ) ) {
@@ -99,7 +101,7 @@ class pjw_groupme_wp_api {
 					$file_array['name'] = basename( $_new_file );
 					$file_array['tmp_name'] = $_new_file;
 
-					$attachment_id = media_handle_sideload( $file_array, $_to_post_id, '' );
+					$attachment_id = media_handle_sideload( $file_array, $_to_post_id, '', array( 'post_date' => $date, 'post_date_gmt' => $date ) );
 				}
 			}
 		}
