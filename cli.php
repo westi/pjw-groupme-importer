@@ -1,6 +1,7 @@
 <?php
 require_once( dirname( dirname( dirname( __DIR__ ) ) ) . '/wp-load.php' );
 require_once( __DIR__ . '/class-pjw-groupme-rest-api.php' );
+require_once( __DIR__ . '/class-pjw-groupme-wp-admin.php' );
 require_once( __DIR__ . '/class-pjw-groupme-wp-api.php' );
 
 function __parse_cli_args() {
@@ -89,7 +90,7 @@ function __dispatch_request( $args ) {
 			case 'sync-messages':
 				if ( isset( $args['group-id' ] ) ) {
 					// Find ID of last synced message
-					global $pjw_groupme_wp_api;
+					$pjw_groupme_wp_api = new pjw_groupme_wp_api();
 					$after_id = $pjw_groupme_wp_api->get_last_synced_message_id( $args['group-id'] );
 					if ( ! $after_id ) {
 						// Hack use an after_id of 1 to get the first message in a group
