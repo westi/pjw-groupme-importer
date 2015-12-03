@@ -1,6 +1,7 @@
 <?php
 require_once( dirname( dirname( dirname( __DIR__ ) ) ) . '/wp-load.php' );
 require_once( __DIR__ . '/class-pjw-groupme-rest-api.php' );
+require_once( __DIR__ . '/class-pjw-groupme-wp-api.php' );
 
 function __parse_cli_args() {
 	$short_to_long = array(
