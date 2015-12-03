@@ -21,7 +21,7 @@ class pjw_groupme_wp_api {
 	 */
 	public function register_post_type( ) {
 		register_post_type(
-			'pjw-groupme-messages',
+			'pjw-groupme-message',
 			array(
 				'label' => 'Messages',
 				'public' => true,
