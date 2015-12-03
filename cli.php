@@ -86,6 +86,28 @@ function __dispatch_request( $args ) {
 					echo "Usage: --user-id=X --action=walk-messages --group-id=X ...\n\n";
 				}
 				break;
+			case 'sync-messages':
+				if ( isset( $args['group-id' ] ) ) {
+					// Find ID of last synced message
+					global $pjw_groupme_wp_api;
+					$after_id = $pjw_groupme_wp_api->get_last_synced_message_id( $args['group-id'] );
+					if ( ! $after_id ) {
+						// Hack use an after_id of 1 to get the first message in a group
+						$after_id = 1;
+					}
+
+					$messages = $rest_api->messages( $args['group-id'], array( 'limit' => 100, 'after_id' => $after_id ) );
+					while( !empty( $messages->messages ) ) {
+						foreach ( $messages->messages as $message ) {
+							echo '.';
+							$pjw_groupme_wp_api->sync_message( $message );
+						}
+						$messages = $rest_api->messages( $args['group-id'], array( 'limit' => 100, 'after_id' => $message->id ) );
+					}
+				} else {
+					echo "Usage: --user-id=X --action=sync-messages --group-id=X ...\n\n";
+				}
+				break;
 		}
 	} else {
 		echo "Usage: --user-id=X --action=Y ...\n\n";
