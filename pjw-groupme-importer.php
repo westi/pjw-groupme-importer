@@ -10,6 +10,7 @@
  
 require_once( __DIR__ . '/class-pjw-groupme-importer.php' );
 require_once( __DIR__ . '/class-pjw-groupme-rest-api.php' );
+require_once( __DIR__ . '/class-pjw-groupme-wp-admin.php' );
 require_once( __DIR__ . '/class-pjw-groupme-wp-api.php' );
 
 function pjw_groupme_importer_go() {
