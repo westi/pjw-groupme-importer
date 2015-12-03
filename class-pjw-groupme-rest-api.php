@@ -10,8 +10,9 @@ class pjw_groupme_rest_api {
 		$this->access_token = $access_token;
 	}
 
-	protected function make_get_request( $path ) {
-		$url = 'https://api.groupme.com/v3/' . $path . '?token=' . $this->access_token;
+	protected function make_get_request( $path, $args = array() ) {
+		$args['token'] = $this->access_token;
+		$url = add_query_arg( $args, 'https://api.groupme.com/v3/' . $path );
 		$response = wp_remote_get( $url );
 		if ( 200 == wp_remote_retrieve_response_code( $response ) ) {
 			return json_decode( wp_remote_retrieve_body( $response ) )->response;
