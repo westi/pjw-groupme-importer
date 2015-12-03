@@ -40,8 +40,8 @@ class pjw_groupme_rest_api {
 		return $this->make_get_request( 'groups/' . $group_id );
 	}
 
-	public function messages( $group_id ) {
-		$messages = $this->make_get_request( 'groups/' . $group_id . '/messages' );
+	public function messages( $group_id, $args = array() ) {
+		$messages = $this->make_get_request( 'groups/' . $group_id . '/messages', $args );
 		// Ensure we are always chronologically sorted
 		usort( $messages->messages, array( $this, 'messages_sorter' ) );
 		return $messages;
