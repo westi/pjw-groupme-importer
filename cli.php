@@ -73,6 +73,11 @@ function __dispatch_request( $args ) {
 					while( !empty( $messages->messages ) ) {
 						foreach ( $messages->messages as $message ) {
 							echo date( DATE_ISO8601, $message->created_at ) . " {$message->name}: {$message->text}\n";
+							if ( count( $message->attachments ) ){
+								foreach( $message->attachments as $attachment ) {
+									echo "\t" . date( DATE_ISO8601, $message->created_at ) . " {$attachment->type} - {$attachment->url}\n";
+								}
+							}
 						}
 						$messages = $rest_api->messages( $args['group-id'], array( 'limit' => 100, 'after_id' => $message->id ) );
 					}
