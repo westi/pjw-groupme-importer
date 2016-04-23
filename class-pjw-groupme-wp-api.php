@@ -36,7 +36,7 @@ class pjw_groupme_wp_api {
 		$_post = array(
 			'post_type' => 'pjw-groupme-message',
 			'post_status' => 'publish',
-			'post_content' => $message->text,
+			'post_content' => empty( $message->text ) ? '--empty--' : $message->text,
 			'post_date' => $date,
 			'post_date_gmt' => $date,
 		);
